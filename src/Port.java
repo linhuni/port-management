@@ -103,6 +103,15 @@ public class Port {
     public boolean unloadCon(Container c){
         return containers.remove(c);
     }
+    //remove vehicle
+    public boolean removeVe(Vehicle v){
+        if(!vehiclesAtPort.contains(v)) {return false;}
+        else {
+            return vehiclesAtPort.remove(v);
+        }
+    }
+    //add vehicle
+
 
     @Override
     public String toString() {

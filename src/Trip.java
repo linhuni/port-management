@@ -1,47 +1,74 @@
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Vector;
 import java.time.LocalDateTime;
 
 
 
 //Trip allows vehicle to go to port
 public class Trip {
-    private ArrayList<Vehicle> vehicles;
+    private Vehicle vehicle;
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
-    private String portDepart;
-    private String portArrival;
-    private TripStatus status;
+    private Port from;
+    private Port to;
 
+    private TripStatus status = TripStatus.PLANNED;
 
+    public Trip(Port from, Port to, Vehicle vehicle) {
+        this.from = from;
+        this.to = to;
+        this.vehicle = vehicle;
+    }
 
     //Move one vehicle from this port to that port
-    public void excecuteTrip(Port from, Port to, Vehicle vehicle) {
-        if (!from.isLanding() || !to.isLanding()) {
-            return;
-        }
-            vehicles.add(vehicle);
-            switch (status) {
-                case PLANNED:
-                    break;
+    public boolean start() {
+        if (from == null || to == null || vehicle == null) return false;
+        if (!from.isLanding() || !to.isLanding()) return false;
 
-                case ONGOING:
-                    vehicle.setCurrentPort(null);
-                    break;
+        switch (status) {
+            case PLANNED:
+                if (vehicle.getCurrentPort() != from) return false;
 
-                case COMPLETED:
-                    vehicle.setCurrentPort(to);
-                    this.arrivalTime = LocalDateTime.now();
-                    break;
+                if (!from.removeVe(vehicle)) return false;
 
-                default:
-                    throw new IllegalStateException("Unknown status: " + status);
-            }
+                vehicle.setCurrentPort(null);
+                status = TripStatus.ONGOING;
+                departureTime = LocalDateTime.now();
+                return true;
 
-
+            default:
+                return false;
         }
     }
+
+    public boolean finish() {
+        if (from == null || to == null || vehicle == null) return false;
+        if (!from.isLanding() || !to.isLanding()) return false;
+
+        switch (status) {
+            case ONGOING:
+                vehicle.setCurrentPort(to);
+
+                if (!to.addVehicle(vehicle)) {
+                    vehicle.setCurrentPort(null); // rollback
+                    return false;
+                }
+
+                status = TripStatus.COMPLETED;
+                arrivalTime = LocalDateTime.now();
+                return true;
+
+            default:
+                return false;
+        }
+    }
+
+
+
+
+    public TripStatus getStatus() {
+        return status;
+    }
+}
 
 
 
