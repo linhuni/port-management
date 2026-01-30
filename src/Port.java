@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Port {
     private String id;
@@ -84,6 +85,7 @@ public class Port {
     public ArrayList<Vehicle> getVehiclesAtPort() {
         return vehiclesAtPort;
     }
+    //add vehicle
     public boolean addVehicle(Vehicle v) {
 
         if (v == null) return false;
@@ -110,7 +112,22 @@ public class Port {
             return vehiclesAtPort.remove(v);
         }
     }
-    //add vehicle
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setStroringCap(int stroringCap) {
+        this.stroringCap = stroringCap;
+    }
 
 
     @Override

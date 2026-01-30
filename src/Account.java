@@ -11,6 +11,8 @@ public class Account {
         this.accountRole = AccountRole.MANAGER; // hoặc USER tuỳ đề
     }
 
+    public Account(){};
+
     // Constructor for  predefined account (ADMIN/MANAGER)
     public Account(String username, String password, AccountRole role) {
         this.username = username;
@@ -84,5 +86,9 @@ public class Account {
                 ", accountRole=" + accountRole +
                 ", accountStatus=" + accountStatus +
                 '}';
+    }
+
+    public String getPassword() {
+        return password;
     }
 }
