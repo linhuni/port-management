@@ -1,12 +1,11 @@
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Ship extends Vehicle{
 
 
-    public Ship(String name, float currentFuel, int carryingCap, float fuelCap, Port currentPort, ArrayList<Container> containers) {
-        super(name, currentFuel, carryingCap, fuelCap, currentPort, containers);
+    public Ship(String name, float currentFuel, int carryingCap, float fuelCap, Port currentPort) {
+        super(name, currentFuel, carryingCap, fuelCap, currentPort);
         this.id = genID();
     }
 

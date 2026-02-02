@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class portSystem {
-    public final Scanner sc = new Scanner(System.in);
+    public static final Scanner sc = new Scanner(System.in);
     public final DataStorage db = new DataStorage();
     private Account currentUser;
 
@@ -110,7 +110,7 @@ public class portSystem {
     }
 
     //For user to enter int
-    public int readInt(){
+    public static int readInt(){
         while(true){
             String input = sc.nextLine().trim();
             try{

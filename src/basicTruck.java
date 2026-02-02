@@ -1,12 +1,8 @@
-
-
-import java.util.ArrayList;
-
 public class basicTruck extends Truck{
 
 
-    public basicTruck(String name, float currentFuel, int carryingCap, float fuelCap, Port currentPort, ArrayList<Container> containers) {
-        super(name, currentFuel, carryingCap, fuelCap, currentPort, containers);
+    public basicTruck(String name, float currentFuel, int carryingCap, float fuelCap, Port currentPort) {
+        super(name, currentFuel, carryingCap, fuelCap, currentPort);
     }
 
     @Override
