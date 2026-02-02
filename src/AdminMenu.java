@@ -256,14 +256,6 @@ public class AdminMenu {
                     return;
                 }
 
-
-
-                System.out.print("New storing capacity (-999 to keep): ");
-                int cap = Integer.parseInt(sc.nextLine().trim());
-                if(cap != 999){
-                    p.setStroringCap(cap);
-                }
-
             }
         }
         System.out.println("Port not found.");
